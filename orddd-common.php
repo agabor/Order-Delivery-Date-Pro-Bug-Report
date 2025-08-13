@@ -10593,7 +10593,9 @@ class orddd_common {
 		);
 
 		if ( empty( $pickup_location_settings['enabled'] ) ) {
-			$pickup_location_settings['enabled'] = 'no';
+			// TypeError: Cannot access offset of type string on string
+			// $pickup_location_settings['enabled'] = 'no'; 
+			return false; // returning directly with false here solves the issue. This covers the case when woocommerce_pickup_location_settings is not an array.
 		}
 
 		return wc_string_to_bool( $pickup_location_settings['enabled'] );
